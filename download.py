@@ -70,7 +70,7 @@ movieCount = movies['MovieCount']
 conn = sqlite3.connect('yify.db')
 c = conn.cursor()
 
-newlist = False
+newlist = []
 oldlist = []
 for movie in movies['MovieList']:
 	c.execute("select count(MovieID) from movies where MovieID = :id", {'id':movie['MovieID']})
@@ -79,7 +79,6 @@ for movie in movies['MovieList']:
 				movie['Quality'], movie['ImdbCode'], movie['TorrentUrl'], movie['TorrentHash'], 
 				movie['TorrentMagnetUrl'])
 	if 0 == c.fetchone()[0]:
-		newlist = []
 		newlist.append(movie['MovieTitle'].encode('ascii','ignore'))
 		# record release
 		c.execute('''
