@@ -11,7 +11,7 @@ http://docs.python.org/2/library/sqlite3.html
 http://stackoverflow.com/questions/8250814/sqlite-autoincrement-how-to-insert-values
 """
 
-import yify, urllib2, transmissionrpc, logging, urllib, httplib, sqlite3, json, time
+import yify, urllib2, transmissionrpc, logging, urllib, httplib, sqlite3, json, time, os
 
 # logging
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
@@ -40,7 +40,7 @@ def save(URL):
 	except KeyError:
 		rfilename = URL.split('/')[-1]
 
-	f = open(WATCH_DIR+rfilename, "wb")
+	f = open(os.path.join(WATCH_DIR,rfilename), "wb")
 	f.write(rfile.read())
 	f.close()
 
